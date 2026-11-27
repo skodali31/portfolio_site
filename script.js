@@ -49,3 +49,13 @@ const spy = new IntersectionObserver(
   { rootMargin: "-45% 0px -50% 0px" }
 );
 sections.forEach((s) => s && spy.observe(s));
+
+// Race progress bar: fills as you scroll down the page
+const raceFill = document.querySelector(".race-fill");
+const updateRace = () => {
+  const max = document.documentElement.scrollHeight - innerHeight;
+  raceFill.style.width = (max > 0 ? (scrollY / max) * 100 : 0) + "%";
+};
+addEventListener("scroll", updateRace, { passive: true });
+addEventListener("resize", updateRace);
+updateRace();

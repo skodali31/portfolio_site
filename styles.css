@@ -246,7 +246,8 @@ em { font-family: var(--serif); font-style: italic; }
 .skills-card .skills-sub { margin-top: 22px; }
 
 /* =========================================================
-   Interest themes
+   Interest themes: anime (intro), running (about, experience,
+   progress bar), NFL (projects), UFC (contact)
    ========================================================= */
 
 /* Chapter chips above each section title */
@@ -257,19 +258,69 @@ em { font-family: var(--serif); font-style: italic; }
   font-size: .82rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
 }
 .chapter span { font-size: 1rem; }
-.chapter.on-accent { background: color-mix(in srgb, var(--on-accent) 18%, transparent); color: var(--on-accent); }
 
-/* Chess: faint board behind the "Right now" card */
-.now-wrap { position: relative; }
-.board {
-  position: absolute; width: 190px; aspect-ratio: 1; top: -44px; right: -24px; z-index: 0;
-  background: conic-gradient(var(--art-ink) 25%, transparent 0 50%, var(--art-ink) 0 75%, transparent 0) 0 0 / 25% 25%;
-  opacity: .08; border-radius: 10px; transform: rotate(-10deg);
+/* ---------- Running: race progress bar under the nav ---------- */
+.race { height: 4px; background: repeating-linear-gradient(90deg, var(--border) 0 10px, transparent 10px 16px); }
+.race-fill { position: relative; height: 100%; width: 0; background: var(--accent); border-radius: 0 4px 4px 0; }
+.race-fill::after {
+  content: "🏃"; position: absolute; right: -9px; top: -15px; font-size: 15px; line-height: 1;
+  transform: scaleX(-1);
 }
-@media (max-width: 640px) { .board { right: 0; width: 150px; } }
-.now { position: relative; z-index: 1; }
 
-/* Running: watch-style splits */
+/* ---------- Anime: manga-page intro ---------- */
+.hero { position: relative; isolation: isolate; }
+.hero::before {               /* halftone dots */
+  content: ""; position: absolute; inset: 0 0 0 35%; z-index: -1; pointer-events: none;
+  background: radial-gradient(var(--art-ink) 1.3px, transparent 1.7px) 0 0 / 12px 12px;
+  -webkit-mask: linear-gradient(to left, #000 10%, transparent 85%);
+          mask: linear-gradient(to left, #000 10%, transparent 85%);
+  opacity: .13;
+}
+.bubble {
+  position: relative; display: block; width: fit-content; margin: 0 0 26px;
+  padding: 8px 20px; border: 2.5px solid var(--text); border-radius: 999px;
+  background: var(--surface); color: var(--text); font-weight: 600;
+}
+.bubble::before, .bubble::after {
+  content: ""; position: absolute; left: 30px; clip-path: polygon(0 0, 100% 0, 15% 100%);
+}
+.bubble::after { bottom: -15px; width: 20px; height: 15px; background: var(--text); }
+.bubble::before { bottom: -10px; left: 33px; width: 14px; height: 11px; background: var(--surface); z-index: 1; }
+
+.speed { position: relative; display: block; width: fit-content; }
+.speed::before {              /* speed lines */
+  content: ""; position: absolute; inset: -70px -90px; z-index: -1; pointer-events: none;
+  background: repeating-conic-gradient(from 0deg at 35% 50%, var(--art-ink) 0 .9deg, transparent .9deg 6deg);
+  -webkit-mask: radial-gradient(ellipse at 35% 50%, transparent 32%, #000 58%, transparent 80%);
+          mask: radial-gradient(ellipse at 35% 50%, transparent 32%, #000 58%, transparent 80%);
+  opacity: .12;
+}
+.speed span { position: relative; }
+
+.now-wrap { position: relative; }
+.now.panel {
+  position: relative; z-index: 1; padding-top: 48px;
+  border: 3px solid var(--text); border-radius: 4px;
+  box-shadow: 8px 8px 0 var(--text); transform: rotate(1.5deg);
+}
+.now-label.caption {
+  position: absolute; top: -3px; left: -3px; margin: 0; display: block;
+  padding: 6px 16px; background: var(--text); color: var(--bg);
+  font-family: var(--serif); font-style: italic; font-size: 1rem; font-weight: 500;
+  letter-spacing: 0; text-transform: none;
+}
+.sfx {
+  position: absolute; top: -40px; right: -10px; z-index: 2;
+  font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; font-weight: 900; font-size: 2.6rem;
+  color: var(--accent); -webkit-text-stroke: 2px var(--text); paint-order: stroke fill;
+  transform: rotate(12deg); pointer-events: none;
+}
+@media (max-width: 640px) {
+  .sfx { top: -30px; right: 4px; font-size: 2rem; }
+  .speed::before { inset: -40px -30px; }
+}
+
+/* ---------- Running: watch-style splits ---------- */
 .splits {
   display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px 12px;
   margin-top: 28px; padding: 18px 20px; border-radius: 18px;
@@ -281,18 +332,30 @@ em { font-family: var(--serif); font-style: italic; }
 .split b { display: block; font-size: 1.9rem; line-height: 1.1; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.02em; color: #8fd1ad; }
 .split span { font-size: .78rem; color: #b5c7bb; }
 
-/* Basketball: jersey tiles on projects */
-.project-art.jersey {
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
-  font-style: normal; min-height: 150px;
+/* ---------- NFL: projects as plays from a playbook ---------- */
+.project .project-art.play {
+  position: relative; display: flex; align-items: center; justify-content: center; min-height: 180px; padding: 32px 10px 10px;
+  background: #3d7656; font-style: normal;
 }
-.jersey-name { font-family: Inter, sans-serif; font-size: .78rem; font-weight: 600; letter-spacing: .22em; opacity: .7; }
-.jersey-num {
-  font-family: Inter, sans-serif; font-weight: 800; font-size: 4.6rem; line-height: 1; letter-spacing: -.02em;
-  color: transparent; -webkit-text-stroke: 2.5px var(--art-ink);
+:root[data-theme="dark"] .project .project-art.play { background: #24412f; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .project .project-art.play { background: #24412f; }
+}
+.play svg { display: block; width: 100%; height: auto; }
+.play .yd   { stroke: rgba(255,255,255,.25); stroke-width: 1; }
+.play .hash { stroke: rgba(255,255,255,.35); stroke-width: 1; }
+.play .los  { stroke: rgba(255,255,255,.75); stroke-width: 1.5; stroke-dasharray: 4 3; }
+.play .o    { fill: none; stroke: #fff; stroke-width: 2; }
+.play .x line { stroke: rgba(255,255,255,.75); stroke-width: 2; stroke-linecap: round; }
+.play .rt   { fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 220; stroke-dashoffset: 0; }
+.project:hover .play .rt { animation: run-route .9s ease; }
+@keyframes run-route { from { stroke-dashoffset: 220; } to { stroke-dashoffset: 0; } }
+.play-tag {
+  position: absolute; top: 10px; left: 14px; color: #fff;
+  font-size: .7rem; font-weight: 700; letter-spacing: .14em; opacity: .9;
 }
 
-/* Running: experience as a race route */
+/* ---------- Running: experience as a race route ---------- */
 .route-flag { margin: 0 0 6px; font-weight: 600; font-size: .9rem; color: var(--accent); }
 .route-flag.start { margin: 6px 0 0; color: var(--muted); }
 .timeline.route { position: relative; padding-left: 28px; margin-left: 9px; }
@@ -307,68 +370,34 @@ em { font-family: var(--serif); font-style: italic; }
 }
 .timeline.route > li:first-child::before { background: var(--accent); box-shadow: 0 0 0 5px var(--accent-soft); }
 
-/* Off the clock */
-.interests { display: grid; gap: 18px; grid-template-columns: 1fr; }
-@media (min-width: 620px) { .interests { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 940px) { .interests { grid-template-columns: repeat(3, 1fr); } }
-.interest {
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 14px 14px 22px; transition: transform .2s, box-shadow .2s;
+/* ---------- UFC: contact as a main-event fight card ---------- */
+.contact-card.fight {
+  position: relative; overflow: hidden; isolation: isolate;
+  background: #17130f; color: #f4ece3;
+  border-left: 10px solid #c8364a; border-right: 10px solid #2f62b0;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.06), var(--shadow);
 }
-.interest:hover { transform: translateY(-4px) rotate(-.4deg); box-shadow: var(--shadow); }
-.interest h3 { font-size: 1.2rem; margin: 0 8px 6px; }
-.interest p { margin: 0 8px; color: var(--muted); font-size: .95rem; }
-.int-art {
-  position: relative; height: 130px; border-radius: 14px; margin-bottom: 16px; overflow: hidden;
-  display: grid; place-items: center; color: var(--art-ink);
+.octagon {
+  position: absolute; left: 50%; top: 50%; width: 560px; height: 560px; z-index: -1;
+  transform: translate(-50%, -50%); opacity: .14; pointer-events: none;
 }
-.tint-sage .int-art { background: var(--sage); }
-.tint-butter .int-art { background: var(--butter); }
-.tint-sky .int-art { background: var(--sky); }
-.tint-lilac .int-art { background: var(--lilac); }
-.tint-rose .int-art { background: var(--rose); }
-.tint-stone .int-art { background: var(--stone); }
-
-.art-run svg { position: absolute; inset: 14px; width: calc(100% - 28px); height: calc(100% - 28px); }
-.art-run path { fill: none; stroke: var(--accent); stroke-width: 3; stroke-dasharray: 2 9; stroke-linecap: round; vector-effect: non-scaling-stroke; }
-.art-run .pin { position: absolute; right: 16px; top: 38px; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 20%, transparent); }
-
-.art-chess::before {
-  content: ""; position: absolute; inset: 0;
-  background: conic-gradient(var(--art-ink) 25%, transparent 0 50%, var(--art-ink) 0 75%, transparent 0) 0 0 / 32px 32px;
-  opacity: .1;
+.octagon polygon { fill: none; stroke: #f4ece3; stroke-width: .7; }
+.main-event { margin: 0 0 18px; font-size: .8rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #e6c35c; }
+.tape { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 26px; }
+.corner {
+  padding: 6px 14px; border-radius: 6px; color: #fff;
+  font-weight: 800; font-size: clamp(.9rem, 2.6vw, 1.2rem); letter-spacing: .06em; text-transform: uppercase;
 }
-.art-chess span { position: relative; font-size: 4rem; line-height: 1; }
-
-.art-court svg { width: 100%; height: 100%; padding: 10px; }
-.art-court svg * { fill: none; stroke: var(--art-ink); stroke-width: 2; opacity: .45; }
-
-.art-game { padding: 0 28px; }
-.art-game .bars { width: 100%; display: grid; gap: 10px; }
-.art-game i { display: block; height: 10px; border-radius: 99px; background: color-mix(in srgb, var(--art-ink) 12%, transparent); position: relative; overflow: hidden; }
-.art-game i::after { content: ""; position: absolute; inset: 0; width: var(--w); border-radius: inherit; background: var(--accent); }
-.art-game i:nth-child(3)::after { background: #d0567a; }
-.art-game .gg { position: absolute; right: 16px; top: 10px; font-weight: 800; font-size: .9rem; letter-spacing: .1em; opacity: .55; }
-
-.art-anime::before {
-  content: ""; position: absolute; inset: -40%;
-  background: repeating-conic-gradient(var(--art-ink) 0 1.2deg, transparent 1.2deg 9deg);
-  -webkit-mask: radial-gradient(circle, transparent 22%, #000 62%);
-          mask: radial-gradient(circle, transparent 22%, #000 62%);
-  opacity: .28;
-}
-.art-anime span { position: relative; font-family: var(--serif); font-style: italic; font-weight: 600; font-size: 3.2rem; line-height: 1; }
-
-.art-octagon .oct {
-  --o: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%);
-  width: 96px; height: 96px; clip-path: var(--o); background: var(--art-ink); opacity: .85;
-  display: grid; place-items: center;
-}
-.art-octagon .oct span {
-  width: calc(100% - 8px); height: calc(100% - 8px); clip-path: var(--o); background: var(--stone);
-  display: grid; place-items: center; font-weight: 800; letter-spacing: .06em; font-size: 1.1rem; color: var(--art-ink);
-}
+.corner.red { background: #c8364a; }
+.corner.blue { background: #2f62b0; }
+.vs { font-family: var(--serif); font-style: italic; font-size: 1.7rem; color: #e6c35c; }
+.fight h2 { color: #f4ece3; }
+.fight .btn-light { background: #f4ece3; color: #17130f; }
+.fight .btn-light:hover { color: #17130f; background: #fff; }
+.fight .socials a, .fight .socials a:hover { color: #f4ece3; }
 
 @media (prefers-reduced-motion: reduce) {
-  .interest:hover { transform: none; }
+  .project:hover .play .rt { animation: none; }
+  .now.panel { transform: none; }
 }
+@media (max-width: 480px) { .tape { flex-direction: column; gap: 6px; } }
