@@ -50,14 +50,27 @@ const spy = new IntersectionObserver(
 );
 sections.forEach((s) => s && spy.observe(s));
 
-// Football "drive" bar: fills as you scroll, and the ball spins as it moves
-const driveFill = document.querySelector(".drive-fill");
-const updateDrive = () => {
+// Runner bar: the page is a 5K. Fills as you scroll; the runner strides
+// while you move, turns around when you scroll up, and shows the distance.
+const race = document.querySelector(".race");
+const raceFill = race.querySelector(".race-fill");
+const pace = race.querySelector(".pace");
+let lastY = scrollY, idle;
+const updateRace = (moving) => {
   const max = document.documentElement.scrollHeight - innerHeight;
-  const pct = max > 0 ? scrollY / max : 0;
-  driveFill.style.width = pct * 100 + "%";
-  driveFill.style.setProperty("--spin", pct * 1080 + "deg");
+  const pct = max > 0 ? Math.min(1, scrollY / max) : 0;
+  raceFill.style.width = pct * 100 + "%";
+  const done = pct >= 0.995;
+  pace.textContent = done ? "5K done 🎉" : (pct * 5).toFixed(1) + " km";
+  race.classList.toggle("done", done);
+  if (scrollY !== lastY) race.classList.toggle("back", scrollY < lastY);
+  lastY = scrollY;
+  if (moving) {
+    race.classList.add("moving");
+    clearTimeout(idle);
+    idle = setTimeout(() => race.classList.remove("moving"), 300);
+  }
 };
-addEventListener("scroll", updateDrive, { passive: true });
-addEventListener("resize", updateDrive);
-updateDrive();
+addEventListener("scroll", () => updateRace(true), { passive: true });
+addEventListener("resize", () => updateRace(false));
+updateRace(false);

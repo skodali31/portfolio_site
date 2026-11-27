@@ -236,20 +236,40 @@ em { font-family: var(--serif); font-style: italic; }
 }
 .skills-card .skills-sub { margin-top: 22px; }
 
-/* NFL: scroll-progress "drive" under the nav. Yard-line ticks every 10%,
-   and a football that spins down the field as you scroll. */
-.drive {
-  height: 4px;
-  background:
-    repeating-linear-gradient(90deg, var(--muted) 0 1px, transparent 1px 10%),
-    var(--border);
+/* Running: the page is a 5K. A runner strides along the track as you
+   scroll, turns around when you scroll up, and shows the distance covered. */
+.nav { overflow-x: clip; }
+.race {
+  position: relative; height: 5px;
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  background: repeating-linear-gradient(90deg, transparent 0 14px, color-mix(in srgb, var(--muted) 35%, transparent) 14px 22px) center / 100% 1px no-repeat;
 }
-.drive-fill { position: relative; height: 100%; width: 0; min-width: 22px; background: var(--accent); border-radius: 0 4px 4px 0; }
-.drive-fill::after {
-  content: "🏈"; position: absolute; right: -10px; top: -8px; font-size: 18px; line-height: 1;
-  transform: rotate(var(--spin, 0deg));
+.race-fill {
+  position: relative; height: 100%; width: 0; min-width: 24px;
+  background: var(--accent); border-radius: 0 4px 4px 0;
 }
-@media (prefers-reduced-motion: reduce) { .drive-fill::after { transform: none; } }
+.runner { position: absolute; right: -10px; top: -17px; font-size: 18px; line-height: 1; transform: scaleX(-1); transition: transform .15s; }
+.race.back .runner { transform: scaleX(1); }
+.stride { display: inline-block; }
+.race.moving .stride { animation: stride .32s ease-in-out infinite; }
+@keyframes stride {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-3px) rotate(-6deg); }
+}
+.pace {
+  position: absolute; right: 16px; top: 9px; white-space: nowrap;
+  padding: 2px 8px; border-radius: 999px; background: var(--text); color: var(--bg);
+  font-size: .7rem; font-weight: 600; font-variant-numeric: tabular-nums;
+  opacity: 0; transform: translateY(-3px); transition: opacity .2s, transform .2s; pointer-events: none;
+}
+.race.moving .pace, .race.done .pace { opacity: 1; transform: none; }
+.race.done .pace { background: var(--accent); color: var(--on-accent); }
+.finish { position: absolute; right: 6px; top: -15px; font-size: 14px; line-height: 1; opacity: .55; transform-origin: bottom left; }
+.race.done .finish { opacity: 1; animation: wave .6s ease-in-out 3; }
+@keyframes wave { 50% { transform: rotate(-14deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .race.moving .stride, .race.done .finish { animation: none; }
+}
 
 /* Project logo in place of a letter (Patternly's own mark) */
 .project-art.logo-art svg { width: 84px; height: 84px; filter: drop-shadow(0 6px 14px rgba(47, 91, 234, .25)); }
