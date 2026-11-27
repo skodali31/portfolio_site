@@ -50,16 +50,43 @@ const spy = new IntersectionObserver(
 );
 sections.forEach((s) => s && spy.observe(s));
 
-// Runner bar: the page is a 5K. Fills as you scroll; the runner strides
-// while you move, turns around when you scroll up, and shows the distance.
+// Runner bar: the page is a 5K cross-country course. Draws a rolling
+// elevation profile, fills the covered part as you scroll, and moves the
+// runner along the terrain. The runner strides while you move, turns
+// around when you scroll up, and shows the distance covered.
 const race = document.querySelector(".race");
-const raceFill = race.querySelector(".race-fill");
+const H = 14;                                        // course height in px
+const terrain = (t) =>                               // gentle rolling hills, y in px
+  H - 4 - 2.6 * (0.5 + 0.5 * Math.sin(2 * Math.PI * (1.6 * t - 0.15)))
+        - 1.6 * (0.5 + 0.5 * Math.sin(2 * Math.PI * (4.3 * t + 0.4)));
+const pts = [];
+for (let i = 0; i <= 200; i++) pts.push(`${(i / 200) * 1000},${terrain(i / 200).toFixed(2)}`);
+const d = "M" + pts.join(" L");
+race.querySelector(".trail").setAttribute("d", d);
+race.querySelector(".trail-done").setAttribute("d", d);
+const coveredRect = race.querySelector(".covered-rect");
+const runnerPos = race.querySelector(".runner-pos");
 const pace = race.querySelector(".pace");
+
+// course flags at 1K, 2K, 3K, 4K
+const flags = [1, 2, 3, 4].map((k) => {
+  const f = document.createElement("span");
+  f.className = "km";
+  f.style.left = k * 20 + "%";
+  f.style.top = terrain(k / 5) + "px";
+  race.appendChild(f);
+  return f;
+});
+
 let lastY = scrollY, idle;
 const updateRace = (moving) => {
   const max = document.documentElement.scrollHeight - innerHeight;
   const pct = max > 0 ? Math.min(1, scrollY / max) : 0;
-  raceFill.style.width = pct * 100 + "%";
+  const w = race.clientWidth;
+  const x = Math.min(w - 10, Math.max(10, pct * w));
+  runnerPos.style.transform = `translate(${x}px, ${terrain(x / w)}px)`;
+  coveredRect.setAttribute("width", (x / w) * 1000);
+  flags.forEach((f, i) => f.classList.toggle("passed", pct >= (i + 1) / 5));
   const done = pct >= 0.995;
   pace.textContent = done ? "5K done 🎉" : (pct * 5).toFixed(1) + " km";
   race.classList.toggle("done", done);

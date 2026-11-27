@@ -236,19 +236,34 @@ em { font-family: var(--serif); font-style: italic; }
 }
 .skills-card .skills-sub { margin-top: 22px; }
 
-/* Running: the page is a 5K. A runner strides along the track as you
-   scroll, turns around when you scroll up, and shows the distance covered. */
+/* Running: the page is a 5K cross-country course. A thin elevation
+   profile with course flags at each kilometre; the runner follows the
+   terrain as you scroll, turns around when you scroll up, and shows the
+   distance covered. Kept low-contrast so it doesn't pull focus. */
 .nav { overflow-x: clip; }
-.race {
-  position: relative; height: 5px;
-  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-  background: repeating-linear-gradient(90deg, transparent 0 14px, color-mix(in srgb, var(--muted) 35%, transparent) 14px 22px) center / 100% 1px no-repeat;
+.race { position: relative; height: 14px; margin-bottom: 2px; }
+.course { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.trail, .trail-done { fill: none; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+.trail { stroke: color-mix(in srgb, var(--muted) 45%, transparent); stroke-width: 1.5; stroke-dasharray: 3 4; }
+.trail-done { stroke: var(--accent); stroke-width: 2.5; }
+
+.km {                                   /* small XC course flag */
+  position: absolute; width: 1.5px; height: 9px; margin-left: -1px;
+  background: color-mix(in srgb, var(--muted) 55%, transparent); transform: translateY(-100%);
 }
-.race-fill {
-  position: relative; height: 100%; width: 0; min-width: 24px;
-  background: var(--accent); border-radius: 0 4px 4px 0;
+.km::after {
+  content: ""; position: absolute; left: 1.5px; top: 0; width: 6px; height: 4.5px;
+  background: color-mix(in srgb, var(--muted) 55%, transparent);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  transition: background .3s;
 }
-.runner { position: absolute; right: -10px; top: -17px; font-size: 18px; line-height: 1; transform: scaleX(-1); transition: transform .15s; }
+.km.passed, .km.passed::after { background: var(--accent); }
+
+.runner-pos { position: absolute; left: 0; top: 0; }
+.runner {
+  position: absolute; left: -9px; top: -17px; font-size: 17px; line-height: 1;
+  transform: scaleX(-1); transition: transform .15s;
+}
 .race.back .runner { transform: scaleX(1); }
 .stride { display: inline-block; }
 .race.moving .stride { animation: stride .32s ease-in-out infinite; }
@@ -257,14 +272,14 @@ em { font-family: var(--serif); font-style: italic; }
   50% { transform: translateY(-3px) rotate(-6deg); }
 }
 .pace {
-  position: absolute; right: 16px; top: 9px; white-space: nowrap;
+  position: absolute; right: 14px; top: 6px; white-space: nowrap;
   padding: 2px 8px; border-radius: 999px; background: var(--text); color: var(--bg);
   font-size: .7rem; font-weight: 600; font-variant-numeric: tabular-nums;
   opacity: 0; transform: translateY(-3px); transition: opacity .2s, transform .2s; pointer-events: none;
 }
 .race.moving .pace, .race.done .pace { opacity: 1; transform: none; }
 .race.done .pace { background: var(--accent); color: var(--on-accent); }
-.finish { position: absolute; right: 6px; top: -15px; font-size: 14px; line-height: 1; opacity: .55; transform-origin: bottom left; }
+.finish { position: absolute; right: 4px; top: -9px; font-size: 13px; line-height: 1; opacity: .5; transform-origin: bottom left; }
 .race.done .finish { opacity: 1; animation: wave .6s ease-in-out 3; }
 @keyframes wave { 50% { transform: rotate(-14deg); } }
 @media (prefers-reduced-motion: reduce) {
