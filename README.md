@@ -8,7 +8,7 @@ My personal portfolio: a single static page, plain HTML, CSS and JavaScript, wit
 python3 -m http.server 8080
 ```
 
-Then open http://localhost:8080.
+Then open http://localhost:8080. The live site is at https://skodali31.github.io.
 
 ## Files
 
