@@ -78,7 +78,7 @@ const flags = [1, 2, 3, 4].map((k) => {
   return f;
 });
 
-let lastY = scrollY, idle;
+let lastY = scrollY, idle, wasStart = true, goUntil = 0, goTimer;
 const updateRace = (moving) => {
   const max = document.documentElement.scrollHeight - innerHeight;
   const pct = max > 0 ? Math.min(1, scrollY / max) : 0;
@@ -88,8 +88,19 @@ const updateRace = (moving) => {
   coveredRect.setAttribute("width", (x / w) * 1000);
   flags.forEach((f, i) => f.classList.toggle("passed", pct >= (i + 1) / 5));
   const done = pct >= 0.995;
-  pace.textContent = done ? "5K done 🎉" : (pct * 5).toFixed(1) + " km";
+  const atStart = pct <= 0.002;
+  if (wasStart && !atStart) {            // just left the start line: flash "Go!"
+    goUntil = performance.now() + 900;
+    clearTimeout(goTimer);
+    goTimer = setTimeout(() => updateRace(false), 950);
+  }
+  wasStart = atStart;
+  const going = !done && !atStart && performance.now() < goUntil;
+  pace.textContent = done ? "5K done 🎉" : atStart ? "On your marks" : going ? "Go!" : (pct * 5).toFixed(1) + " km";
   race.classList.toggle("done", done);
+  race.classList.toggle("start", atStart);
+  race.classList.toggle("go", going);
+  race.classList.toggle("early", x < 140);
   if (scrollY !== lastY) race.classList.toggle("back", scrollY < lastY);
   lastY = scrollY;
   if (moving) {

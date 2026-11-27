@@ -278,7 +278,14 @@ em { font-family: var(--serif); font-style: italic; }
   opacity: 0; transform: translateY(-3px); transition: opacity .2s, transform .2s; pointer-events: none;
 }
 .race.moving .pace, .race.done .pace { opacity: 1; transform: none; }
-.race.done .pace { background: var(--accent); color: var(--on-accent); }
+.race.done .pace, .race.go .pace { background: var(--accent); color: var(--on-accent); }
+.race.start .pace, .race.go .pace { opacity: 1; transform: none; }
+.race.early .pace { right: auto; left: 14px; }       /* near the start, show the tag to the right */
+.start-line {                           /* double start line at the left end */
+  position: absolute; left: 3px; top: 1px; width: 4px; height: 11px;
+  border-left: 1.5px solid color-mix(in srgb, var(--muted) 60%, transparent);
+  border-right: 1.5px solid color-mix(in srgb, var(--muted) 60%, transparent);
+}
 .finish { position: absolute; right: 4px; top: -9px; font-size: 13px; line-height: 1; opacity: .5; transform-origin: bottom left; }
 .race.done .finish { opacity: 1; animation: wave .6s ease-in-out 3; }
 @keyframes wave { 50% { transform: rotate(-14deg); } }
