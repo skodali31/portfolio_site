@@ -27,6 +27,7 @@
           <li><a href="#about">About</a></li>
           <li><a href="#work">Work</a></li>
           <li><a href="#experience">Experience</a></li>
+          <li><a href="#interests">Interests</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
@@ -52,18 +53,22 @@
         </div>
       </div>
 
+      <div class="now-wrap">
+      <div class="board" aria-hidden="true"></div>
       <aside class="now" aria-label="What I'm doing now">
-        <p class="now-label"><span class="dot"></span> Right now</p>
+        <p class="now-label"><span class="dot"></span> Right now · next moves</p>
         <ul>
           <li><strong>Building</strong> a web playground for Tempo, my chess-variant engine in Rust</li>
           <li><strong>Improving</strong> the evals behind Patternly's tutoring</li>
           <li><strong>Open to</strong> new roles and collaborations</li>
         </ul>
       </aside>
+      </div>
     </section>
 
     <!-- ABOUT -->
     <section id="about" class="container section reveal">
+      <p class="chapter"><span>♟</span> The opening</p>
       <h2 class="section-title">A little about me</h2>
       <div class="about-grid">
         <div class="about-text">
@@ -82,6 +87,13 @@
             Away from the keyboard, I'm usually on a long run, playing chess or basketball, watching UFC
             or anime, or losing a few rounds of Marvel Rivals.
           </p>
+          <div class="splits" aria-label="Stats">
+            <p class="splits-label">Splits so far</p>
+            <div class="split"><b>03</b><span>roles</span></div>
+            <div class="split"><b>321</b><span>tests written</span></div>
+            <div class="split"><b>02</b><span>hackathon builds</span></div>
+            <div class="split"><b>'28</b><span>graduating</span></div>
+          </div>
         </div>
         <div class="skills-card">
           <h3>Languages</h3>
@@ -100,10 +112,11 @@
 
     <!-- WORK -->
     <section id="work" class="container section reveal">
+      <p class="chapter"><span>🏀</span> Starting lineup</p>
       <h2 class="section-title">Selected work</h2>
       <div class="projects">
         <article class="project tint-sky">
-          <div class="project-art" aria-hidden="true">P</div>
+          <div class="project-art jersey" aria-hidden="true"><span class="jersey-name">PATTERNLY</span><span class="jersey-num">01</span></div>
           <div class="project-body">
             <h3>Patternly</h3>
             <p>An explain-first tutor for algorithm patterns. You explain the idea in plain words and it grades you, gives hints that are checked so they don't leak the answer, and schedules reviews with spaced repetition. Tutor quality is measured with evals.</p>
@@ -116,7 +129,7 @@
         </article>
 
         <article class="project tint-sage">
-          <div class="project-art" aria-hidden="true">T</div>
+          <div class="project-art jersey" aria-hidden="true"><span class="jersey-name">TETHER</span><span class="jersey-num">02</span></div>
           <div class="project-body">
             <h3>Tether</h3>
             <p>Multi-agent orchestration with Claude. A supervisor plans the work, specialist agents use tools, and a reviewer agent checks the results. It has long-term memory, human-in-the-loop review, and full tracing and replay.</p>
@@ -128,7 +141,7 @@
         </article>
 
         <article class="project tint-butter">
-          <div class="project-art" aria-hidden="true">♞</div>
+          <div class="project-art jersey" aria-hidden="true"><span class="jersey-name">TEMPO</span><span class="jersey-num">64</span></div>
           <div class="project-body">
             <h3>Tempo <span class="badge">In progress</span></h3>
             <p>Invent a chess variant by writing its rules in a short text file, and Tempo turns it into a program that knows every legal move. It already handles King of the Hill, Antichess and Atomic, matches Fairy-Stockfish on every one, and is tested with a fuzzer that writes random rules files.</p>
@@ -141,8 +154,10 @@
 
     <!-- EXPERIENCE -->
     <section id="experience" class="container section reveal">
+      <p class="chapter"><span>⏱</span> The long run</p>
       <h2 class="section-title">Experience</h2>
-      <ol class="timeline">
+      <p class="route-flag">📍 You are here</p>
+      <ol class="timeline route">
         <li>
           <div class="when">Summer 2026</div>
           <div>
@@ -172,11 +187,59 @@
           </div>
         </li>
       </ol>
+      <p class="route-flag start">🏁 Start line</p>
+    </section>
+
+    <!-- INTERESTS -->
+    <section id="interests" class="container section reveal">
+      <p class="chapter"><span>🎮</span> Off the clock</p>
+      <h2 class="section-title">When I'm not coding</h2>
+      <div class="interests">
+        <article class="interest tint-sage">
+          <div class="int-art art-run" aria-hidden="true">
+            <svg viewBox="0 0 300 120" preserveAspectRatio="none"><path d="M10 95 C 60 20, 100 110, 150 60 S 240 10, 290 40" /></svg>
+            <span class="pin"></span>
+          </div>
+          <h3>Long-distance running</h3>
+          <p>Long runs are where I do my best thinking, and a lot of my debugging.</p>
+        </article>
+        <article class="interest tint-butter">
+          <div class="int-art art-chess" aria-hidden="true"><span>♞</span></div>
+          <h3>Chess</h3>
+          <p>The reason Tempo exists: what if the rules were up to you?</p>
+        </article>
+        <article class="interest tint-sky">
+          <div class="int-art art-court" aria-hidden="true">
+            <svg viewBox="0 0 300 120" preserveAspectRatio="xMidYMid slice"><rect x="6" y="6" width="288" height="108" rx="4"/><line x1="150" y1="6" x2="150" y2="114"/><circle cx="150" cy="60" r="20"/><rect x="6" y="36" width="54" height="48"/><rect x="240" y="36" width="54" height="48"/><path d="M6 20 A 70 70 0 0 1 6 100"/><path d="M294 20 A 70 70 0 0 0 294 100"/></svg>
+          </div>
+          <h3>Basketball</h3>
+          <p>Playing pickup or catching a game whenever I get the chance.</p>
+        </article>
+        <article class="interest tint-lilac">
+          <div class="int-art art-game" aria-hidden="true">
+            <div class="bars"><i style="--w:92%"></i><i style="--w:64%"></i><i style="--w:28%"></i></div>
+            <span class="gg">GG</span>
+          </div>
+          <h3>Marvel Rivals</h3>
+          <p>Team fights, hero swaps, and the occasional clutch play.</p>
+        </article>
+        <article class="interest tint-rose">
+          <div class="int-art art-anime" aria-hidden="true"><span>!!</span></div>
+          <h3>Anime</h3>
+          <p>Always on the lookout for the next series to start.</p>
+        </article>
+        <article class="interest tint-stone">
+          <div class="int-art art-octagon" aria-hidden="true"><span class="oct"><span>R5</span></span></div>
+          <h3>UFC</h3>
+          <p>Fight nights, and breaking down the strategy afterward.</p>
+        </article>
+      </div>
     </section>
 
     <!-- CONTACT -->
     <section id="contact" class="container section reveal">
       <div class="contact-card">
+        <p class="chapter on-accent"><span>🥊</span> Final round</p>
         <h2>Let's make something together.</h2>
         <p>I'm open to new opportunities and collaborations. Whether you have a question or just want to say hi, my inbox is always open.</p>
         <a href="mailto:you@example.com" class="btn btn-light">Say hello ✉</a>
