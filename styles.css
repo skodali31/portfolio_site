@@ -289,3 +289,4 @@ em { font-family: var(--serif); font-style: italic; }
 /* Project logo in place of a letter (Patternly's own mark) */
 .project-art.logo-art svg { width: 84px; height: 84px; filter: drop-shadow(0 6px 14px rgba(47, 91, 234, .25)); }
 .project-art.tether-art svg { filter: drop-shadow(0 6px 14px rgba(47, 107, 79, .25)); }
+.project-art.tempo-art svg { filter: drop-shadow(0 6px 14px rgba(143, 114, 32, .25)); }
