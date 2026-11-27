@@ -1,16 +1,16 @@
 /* ---------- Theme tokens ----------
-   Warm "paper and terracotta" palette. Change --accent to re-theme. */
+   Warm "paper and forest green" palette. Change --accent to re-theme. */
 :root {
   --bg: #fbf6ef;
   --surface: #fffdf9;
   --text: #2b2420;
   --muted: #6b5f57;
   --border: #ecdfd0;
-  --accent: #c4502c;          /* terracotta: links, buttons */
-  --accent-hover: #a8411f;
-  --accent-soft: #fbe3d8;
+  --accent: #2f6b4f;          /* forest green: links, buttons */
+  --accent-hover: #24563f;
+  --accent-soft: #dcebe1;
   --on-accent: #ffffff;
-  --coral: #fde3d6;
+  --sky: #dfe7f1;
   --sage: #e2ecd9;
   --butter: #faeec4;
   --art-ink: #2b2420;
@@ -26,11 +26,11 @@
     --text: #f4ece3;
     --muted: #b8aa9c;
     --border: #3a322b;
-    --accent: #f2906c;
-    --accent-hover: #f7a888;
-    --accent-soft: #3d2a21;
+    --accent: #8fd1ad;
+    --accent-hover: #aee0c3;
+    --accent-soft: #22332a;
     --on-accent: #1c1815;
-    --coral: #3b2822;
+    --sky: #252c36;
     --sage: #283024;
     --butter: #373020;
     --art-ink: #f4ece3;
@@ -43,11 +43,11 @@
   --text: #f4ece3;
   --muted: #b8aa9c;
   --border: #3a322b;
-  --accent: #f2906c;
-  --accent-hover: #f7a888;
-  --accent-soft: #3d2a21;
+  --accent: #8fd1ad;
+  --accent-hover: #aee0c3;
+  --accent-soft: #22332a;
   --on-accent: #1c1815;
-  --coral: #3b2822;
+  --sky: #252c36;
   --sage: #283024;
   --butter: #373020;
   --art-ink: #f4ece3;
@@ -182,7 +182,7 @@ em { font-family: var(--serif); font-style: italic; }
   display: grid; place-items: center; min-height: 120px;
   font-family: var(--serif); font-style: italic; font-size: 4.5rem; color: var(--art-ink);
 }
-.tint-coral .project-art { background: var(--coral); }
+.tint-sky .project-art { background: var(--sky); }
 .tint-sage .project-art { background: var(--sage); }
 .tint-butter .project-art { background: var(--butter); }
 .project-body { padding: 26px 28px; }
