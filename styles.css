@@ -1,17 +1,17 @@
 /* ---------- Theme tokens ----------
-   Warm "paper and forest green" palette. Change --accent to re-theme. */
+   Warm "paper and denim blue" palette. Change --accent to re-theme. */
 :root {
   --bg: #fbf6ef;
   --surface: #fffdf9;
   --text: #2b2420;
   --muted: #6b5f57;
   --border: #ecdfd0;
-  --accent: #2f6b4f;          /* forest green: links, buttons */
-  --accent-hover: #24563f;
-  --accent-soft: #dcebe1;
+  --accent: #2f5d8a;          /* denim blue: links, buttons */
+  --accent-hover: #244b72;
+  --accent-soft: #dde6f1;
   --on-accent: #ffffff;
   --sky: #dfe7f1;
-  --sage: #e2ecd9;
+  --sage: #e4e5f5;
   --butter: #faeec4;
   --art-ink: #2b2420;
   --shadow: 0 1px 2px rgba(70, 40, 20, .05), 0 12px 32px rgba(70, 40, 20, .08);
@@ -26,12 +26,12 @@
     --text: #f4ece3;
     --muted: #b8aa9c;
     --border: #3a322b;
-    --accent: #8fd1ad;
-    --accent-hover: #aee0c3;
-    --accent-soft: #22332a;
+    --accent: #8fb6e2;
+    --accent-hover: #aecaeb;
+    --accent-soft: #212c3a;
     --on-accent: #1c1815;
     --sky: #252c36;
-    --sage: #283024;
+    --sage: #282a3c;
     --butter: #373020;
     --art-ink: #f4ece3;
     --shadow: 0 12px 32px rgba(0, 0, 0, .35);
@@ -43,12 +43,12 @@
   --text: #f4ece3;
   --muted: #b8aa9c;
   --border: #3a322b;
-  --accent: #8fd1ad;
-  --accent-hover: #aee0c3;
-  --accent-soft: #22332a;
+  --accent: #8fb6e2;
+  --accent-hover: #aecaeb;
+  --accent-soft: #212c3a;
   --on-accent: #1c1815;
   --sky: #252c36;
-  --sage: #283024;
+  --sage: #282a3c;
   --butter: #373020;
   --art-ink: #f4ece3;
   --shadow: 0 12px 32px rgba(0, 0, 0, .35);
@@ -146,7 +146,7 @@ em { font-family: var(--serif); font-style: italic; }
   padding: 24px 26px; box-shadow: var(--shadow); transform: rotate(1.2deg);
 }
 .now-label { margin: 0 0 12px; font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 8px; }
-.dot { width: 8px; height: 8px; border-radius: 50%; background: #4caf6e; box-shadow: 0 0 0 4px rgba(76,175,110,.18); }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
 .now ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
 .now li { color: var(--muted); font-size: .95rem; }
 .now strong { color: var(--text); font-weight: 600; }
@@ -295,5 +295,5 @@ em { font-family: var(--serif); font-style: italic; }
 
 /* Project logo in place of a letter (Patternly's own mark) */
 .project-art.logo-art svg { width: 84px; height: 84px; filter: drop-shadow(0 6px 14px rgba(47, 91, 234, .25)); }
-.project-art.tether-art svg { filter: drop-shadow(0 6px 14px rgba(47, 107, 79, .25)); }
+.project-art.tether-art svg { filter: drop-shadow(0 6px 14px rgba(44, 74, 122, .25)); }
 .project-art.tempo-art svg { filter: drop-shadow(0 6px 14px rgba(143, 114, 32, .25)); }
