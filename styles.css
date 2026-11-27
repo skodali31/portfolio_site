@@ -250,3 +250,6 @@ em { font-family: var(--serif); font-style: italic; }
   transform: rotate(var(--spin, 0deg));
 }
 @media (prefers-reduced-motion: reduce) { .drive-fill::after { transform: none; } }
+
+/* Project logo in place of a letter (Patternly's own mark) */
+.project-art.logo-art svg { width: 84px; height: 84px; filter: drop-shadow(0 6px 14px rgba(47, 91, 234, .25)); }
