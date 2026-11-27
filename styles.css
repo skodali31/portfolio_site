@@ -234,3 +234,4 @@ em { font-family: var(--serif); font-style: italic; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .now { transform: none; }
 }
+.skills-card .skills-sub { margin-top: 22px; }
