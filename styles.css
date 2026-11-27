@@ -239,14 +239,14 @@ em { font-family: var(--serif); font-style: italic; }
 /* NFL: scroll-progress "drive" under the nav. Yard-line ticks every 10%,
    and a football that spins down the field as you scroll. */
 .drive {
-  height: 3px;
+  height: 4px;
   background:
     repeating-linear-gradient(90deg, var(--muted) 0 1px, transparent 1px 10%),
     var(--border);
 }
-.drive-fill { position: relative; height: 100%; width: 0; background: var(--accent); border-radius: 0 3px 3px 0; }
+.drive-fill { position: relative; height: 100%; width: 0; min-width: 22px; background: var(--accent); border-radius: 0 4px 4px 0; }
 .drive-fill::after {
-  content: "🏈"; position: absolute; right: -8px; top: -7px; font-size: 13px; line-height: 1;
+  content: "🏈"; position: absolute; right: -10px; top: -8px; font-size: 18px; line-height: 1;
   transform: rotate(var(--spin, 0deg));
 }
 @media (prefers-reduced-motion: reduce) { .drive-fill::after { transform: none; } }
