@@ -50,12 +50,14 @@ const spy = new IntersectionObserver(
 );
 sections.forEach((s) => s && spy.observe(s));
 
-// Race progress bar: fills as you scroll down the page
-const raceFill = document.querySelector(".race-fill");
-const updateRace = () => {
+// Football "drive" bar: fills as you scroll, and the ball spins as it moves
+const driveFill = document.querySelector(".drive-fill");
+const updateDrive = () => {
   const max = document.documentElement.scrollHeight - innerHeight;
-  raceFill.style.width = (max > 0 ? (scrollY / max) * 100 : 0) + "%";
+  const pct = max > 0 ? scrollY / max : 0;
+  driveFill.style.width = pct * 100 + "%";
+  driveFill.style.setProperty("--spin", pct * 1080 + "deg");
 };
-addEventListener("scroll", updateRace, { passive: true });
-addEventListener("resize", updateRace);
-updateRace();
+addEventListener("scroll", updateDrive, { passive: true });
+addEventListener("resize", updateDrive);
+updateDrive();
